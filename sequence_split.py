@@ -30,6 +30,7 @@ output = open('output.txt', mode='a', encoding='utf-8')
 for name, content in sequences.items():
     if len(content) > 1590:
         print(name, 'is longer than 1590bp')
+        continue
     elif len(content) == 1590:
         content = content
     while len(content) < 1590:
