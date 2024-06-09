@@ -3,7 +3,7 @@ import matplotlib
 
 matplotlib.use('TkAgg')
 
-
+# the GC content is defined as the ratio of G and C in a DNA sequence 
 def gc_content(seq):
     return (seq.count('g') + seq.count('c')) / len(seq)
 
@@ -21,12 +21,12 @@ def plot_gc_content(gc_contents,):
     plt.title('GC Content Sliding Window',font = 'Times New Roman')
     plt.show()
 
-# 读取DNA序列文件
+# read DNA sequence file
 with open('sequence.txt', 'r') as file:
     sequence = file.read().replace('\n', '')
 
-# 计算滑动窗口GC含量
+# calculate the GC content
 gc_contents = sliding_window_gc(sequence, window_size=200)
 
-# 生成GC含量滑窗图
+# plot the GC content figure
 plot_gc_content(gc_contents)
