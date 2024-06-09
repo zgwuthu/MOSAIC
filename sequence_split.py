@@ -34,6 +34,7 @@ for name, content in sequences.items():
         continue
     elif len(content) == 1590:
         content = content
+    # if this fragment is shorter than 1590 bp, it would be padded by nonsense sequence
     while len(content) < 1590:
         nucleotide = random.choice(['A', 'G', 'C', 'T'])
         content += nucleotide
