@@ -1,6 +1,6 @@
 import random
 
-
+# define a function to read the fasta file
 def read_fasta_file(file_path):
     sequences = {}
     current_sequence_name = ''
@@ -22,11 +22,12 @@ def read_fasta_file(file_path):
 
     return sequences
 
-
+# read the fasta file
 file_path = 'sequence.fasta'
 sequences = read_fasta_file(file_path)
 output = open('output.txt', mode='a', encoding='utf-8')
 
+# the length here can be changed as demanded 
 for name, content in sequences.items():
     if len(content) > 1590:
         print(name, 'is longer than 1590bp')
@@ -36,7 +37,8 @@ for name, content in sequences.items():
     while len(content) < 1590:
         nucleotide = random.choice(['A', 'G', 'C', 'T'])
         content += nucleotide
-
+    
+    # these two sequences are two homologous regions appended two ends
     content = 'GCAATGCAGACTCAGAGAGAACCCGCCACC' + content.upper() + 'GCTTCCGGTCTGGTTCGCTTTGAAGCTCGA'
     complementary_sequence = ''
     ture_complementary_sequence = ''
@@ -51,6 +53,7 @@ for name, content in sequences.items():
             complementary_sequence += 'C'
     ture_complementary_sequence = complementary_sequence[::-1]
 
+    # the 1650-bp sequence is segmented to 54 60-mers and 2 30-mers
     a = 30
     for i in range(27):
         b = a + 60
