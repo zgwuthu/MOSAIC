@@ -1,3 +1,12 @@
+# This script was utilized to standardize the length of the gene sequence via padding 
+# and subsequent cleavage into uniform-length oligonucleotides.
+# sequence.fasta is the sequence file of target genes
+
+# In this specific demonstration, we showcase the processing of 100 genes, 
+# all initially shorter than 1590 bp. These genes were first padded to a uniform length of 1590 bp. 
+# Subsequently, they were flanked by two homologous ends (left and right) and then segmented into component oligonucleotides 
+# at a fixed length of 60 bp per oligo.
+
 import random
 
 # define a function to read the fasta file
