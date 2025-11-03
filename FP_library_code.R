@@ -5,7 +5,7 @@ rev_comp<-function(dna){c
     paste(rev(sapply(unlist(strsplit(dna,split="")), function(x) {switch(x, A = "T", T = "A", G = "C", C = "G") })),collapse = ""))
 }#get the reverse complementary sequence of DNA
 translate_dna <- function(dna_sequence) {c
-  # 定义兼并碱基的所有可能对应碱基
+  # Define all possible corresponding bases for degenerate bases
   dna_sequence=toupper(dna_sequence)
   dna_sequence=unlist(strsplit(dna_sequence,""))
   degenerate_bases <- list(
@@ -22,18 +22,18 @@ translate_dna <- function(dna_sequence) {c
     "N" = c("A", "C", "G", "T")
   )
   
-  # 检查输入是否为DNA序列
+  # Check if input is DNA sequence
   if (!all(dna_sequence %in% c("A", "C", "G", "T", names(degenerate_bases)))) {
-    stop("输入包含无效的碱基")
+    stop("Input contains invalid bases")
   }
   
-  # 展开兼并碱基的所有可能组合
+  # Expand all possible combinations of degenerate bases
   all_combinations <- list()
   
   for (i in seq_along(dna_sequence)) {
     base <- dna_sequence[i]
     if (base %in% names(degenerate_bases)) {
-      # 如果是兼并碱基，添加所有可能对应碱基
+      # If degenerate base, add all possible corresponding bases
       if (length(all_combinations) == 0) {
         all_combinations <- lapply(degenerate_bases[[base]], function(x) x)
       } else {
@@ -46,7 +46,7 @@ translate_dna <- function(dna_sequence) {c
         all_combinations <- new_combinations
       }
     } else {
-      # 如果是普通碱基，保持不变
+      # If normal base, keep unchanged
       if (length(all_combinations) == 0) {
         all_combinations <- list(base)
       } else {
@@ -55,7 +55,7 @@ translate_dna <- function(dna_sequence) {c
     }
   }
   
-  # 定义密码子表
+  # Define codon table
   codon_table <- c(
     AAA = "K", AAC = "N", AAG = "K", AAT = "N",
     CAA = "Q", CAC = "H", CAG = "Q", CAT = "H",
@@ -75,33 +75,33 @@ translate_dna <- function(dna_sequence) {c
     TTA = "L", TTC = "F", TTG = "L", TTT = "F"
   )
   
-  # 翻译所有可能的DNA序列
+  # Translate all possible DNA sequences
   all_proteins <- list()
   
   for (dna in all_combinations) {
     protein <- ""
     
-    # 确保序列长度是3的倍数
+    # Ensure sequence length is multiple of 3
     if (nchar(dna) %% 3 != 0) {
-      warning("DNA序列长度不是3的倍数，将截断到最后一个完整的密码子")
+      warning("DNA sequence length is not multiple of 3, will truncate to last complete codon")
       dna <- substr(dna, 1, floor(nchar(dna)/3)*3)
     }
     
-    # 翻译密码子
+    # Translate codons
     for (i in seq(1, nchar(dna), by=3)) {
       codon <- substr(dna, i, i+2)
       if (codon %in% names(codon_table)) {
         protein <- paste0(protein, codon_table[[codon]])
       } else {
-        warning(paste("未知的密码子:", codon))
-        protein <- paste0(protein, "X")  # 用X表示未知氨基酸
+        warning(paste("Unknown codon:", codon))
+        protein <- paste0(protein, "X")  # Use X to represent unknown amino acid
       }
     }
     
     all_proteins[[length(all_proteins) + 1]] <- protein
   }
   
-  # 返回所有可能的多肽序列
+  # Return all possible polypeptide sequences
   return(all_proteins)
 }#get all posible residue combinations from one degenerated DNA sequence
 
