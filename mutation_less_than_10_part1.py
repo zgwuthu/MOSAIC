@@ -1,4 +1,12 @@
-
+# This code was completed with the assistance of Deepseek
+# We subsequently sought to determine how many genes, despite not yielding completely flawless sequences, 
+# were successfully synthesized but contained minor mutations. 
+# Given the computationally intensive nature of searching the entire assembled sequence file (joined_sequences.fasta), 
+# we implemented a targeted screening strategy. 
+# This involved extracting the start, end, and a central segment of the full sequence 
+# for each non-flawless gene to serve as a unique **feature sequence**. 
+# The joined_sequences.fasta file was then screened against these feature sequences, 
+# and all matching reads were extracted to generate a new, computationally manageable file: feature_matched_reads}.
 
 
 import os
