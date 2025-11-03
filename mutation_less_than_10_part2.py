@@ -1,3 +1,6 @@
+# This code was completed with the assistance of Deepseek
+# In Part 1 of the analysis, we generated the filtered reads file,feature_matched_reads. 
+# We subsequently performed a mismatch search against this smaller file to quantify the sequencing errors and output the results.
 
 
 import os
