@@ -1,4 +1,9 @@
-
+# This code was completed with the assistance of Deepseek
+# The file Max_cds_ALL.txt contains reference sequences for all genes. 
+# In this code, the paired-end sequencing files are initially assembled by identifying overlapping regions, 
+# generating a file of concatenated sequences (joined_sequences.fasta). 
+# Subsequently, the reference sequences are searched against the assembly results, 
+# with occurrence frequencies being quantified and statistically analyzed. 
 
 
 port gzip
@@ -380,8 +385,8 @@ def match_genes_parallel(joined_file, ref_file, num_processes=30):
 def main():
     """Main function - optimized for high memory and multi-core systems"""
     # File paths
-    r1_file = "FT150028379_L01_BGI_1.fq.gz"
-    r2_file = "FT150028379_L01_BGI_2.fq.gz"
+    r1_file = "xxx_1.fq.gz"
+    r2_file = "xxx_2.fq.gz"
     ref_file = "Max_cds_ALL.txt"
     output_file = "joined_sequences.fasta"
 
